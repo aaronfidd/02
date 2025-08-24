@@ -4,7 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aaron Fiddelke - Graphic Designer Portfolio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f8f9fb;
+            color: #222;
+            line-height: 1.6;
+            overflow-x: hidden;
+            animation: bgMove 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgMove {
+            0% {
+                background-position: 20% 80%, 80% 20%, 40% 40%;
+            }
+            50% {
+                background-position: 30% 70%, 70% 30%, 50% 50%;
+            }
+            100% {
+                background-position: 15% 85%, 85% 15%, 35% 45%;
+            }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            color: #222;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo {
+            background: linear-gradient(135deg, #e76f38, #e76f38);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #222;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-menu a:hover {
+            color: #e76f38;
+            background: rgba(255, 130, 71, 0.08);
+        }
         .nav-menu a::after {
             background: linear-gradient(90deg, #e76f38, #e76f38);
         }
@@ -710,6 +783,62 @@
         <p>&copy; 2025 by Aaron Fiddelke</p>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script>
+        // Smooth scrolling and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll reveal animation
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all scroll reveal elements
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Smooth scroll for navigation
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Add smooth scrolling functionality here
+                });
+            });
+
+            // Button interactions
+            document.querySelectorAll('button').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (this.classList.contains('skill-button')) {
+                        e.preventDefault();
+                        alert('Portfolio section would open here!');
+                    }
+                    if (this.classList.contains('cta-final')) {
+                        e.preventDefault();
+                        alert('Contact form would open here!');
+                    }
+                });
+
+            });
+
+            // Skill text hover effects
+            document.querySelectorAll('.skill-text').forEach(text => {
+                text.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                
+                text.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
